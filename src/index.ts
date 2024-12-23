@@ -33,7 +33,7 @@ cron.schedule("*/10 * * * *", () => {
 app.use(express.json());
 // app.use(express.static("uploads"));
 app.use(express.static(path.join(__dirname, "uploads")));
-// adminseeder();
+adminseeder();
 app.get("/", (req, res) => {
   res.send("sucess");
 });
@@ -45,7 +45,7 @@ app.use("/customer/cart", cartRoute);
 app.use("/order", orderRoute);
 
 const server = app.listen(process.env.PORT, () => {
-  // categoryController.seedCategory();
+  categoryController.seedCategory();
   console.log(`Server running on port ${process.env.PORT}`);
   app;
 });
