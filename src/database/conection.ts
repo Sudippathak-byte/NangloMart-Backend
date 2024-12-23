@@ -34,7 +34,7 @@ sequelize
   .catch((err) => {
     console.log(err);
   });
-sequelize.sync({ force: false ,alter : false}).then(() => {
+sequelize.sync({ force: false, alter:false}).then(() => {
   console.log("Tables synced!");
 });
 
