@@ -27,17 +27,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const catchAsyncError_1 = __importDefault(require("../services/catchAsyncError"));
 const authMiddleware_1 = __importStar(require("../middleware/authMiddleware"));
-const userController_1 = __importDefault(require("../controllers/userController"));
+const multerMiddleware_1 = require("../middleware/multerMiddleware");
+const catchAsyncError_1 = __importDefault(require("../services/catchAsyncError"));
+const productController_1 = __importDefault(require("../controllers/productController"));
+const upload = (0, multerMiddleware_1.multer)({ storage: multerMiddleware_1.storage });
 const router = express_1.default.Router();
-router.route("/register").post((0, catchAsyncError_1.default)(userController_1.default.registerUser));
-router.route("/login").post((0, catchAsyncError_1.default)(userController_1.default.loginUser));
 router
-    .route("/users")
-    .get(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), (0, catchAsyncError_1.default)(userController_1.default.fetchUsers));
+    .route("/")
+    .post(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), upload.single("image"), (0, catchAsyncError_1.default)(productController_1.default.addProduct))
+    .get(productController_1.default.getAllProducts);
 router
-    .route("/user/:id")
-    .delete(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), (0, catchAsyncError_1.default)(userController_1.default.deleteUser))
-    .patch(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), (0, catchAsyncError_1.default)(userController_1.default.UpdateUser));
+    .route("/:id")
+    .get(productController_1.default.getSingleProduct)
+    .delete(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), productController_1.default.deleteProduct)
+    .patch(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), upload.single("image"), productController_1.default.updateProduct);
+router
+    .route("/review/:id")
+    .post(authMiddleware_1.default.isAuthenticated, (0, catchAsyncError_1.default)(productController_1.default.createProductReview));
 exports.default = router;

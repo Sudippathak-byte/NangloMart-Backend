@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
-let User = class User extends sequelize_typescript_1.Model {
+let Payment = class Payment extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
@@ -19,37 +19,32 @@ __decorate([
         defaultValue: sequelize_typescript_1.DataType.UUIDV4,
     }),
     __metadata("design:type", String)
-], User.prototype, "id", void 0);
+], Payment.prototype, "id", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.ENUM("cod", "khalti", "esewa"),
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Payment.prototype, "paymentMethod", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.ENUM("paid", "unpaid"),
+        defaultValue: "unpaid",
+    }),
+    __metadata("design:type", String)
+], Payment.prototype, "paymentStatus", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING,
     }),
     __metadata("design:type", String)
-], User.prototype, "username", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.ENUM("customer", "admin"),
-        defaultValue: "customer",
-    }),
-    __metadata("design:type", String)
-], User.prototype, "role", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
-User = __decorate([
+], Payment.prototype, "pidx", void 0);
+Payment = __decorate([
     (0, sequelize_typescript_1.Table)({
-        tableName: "users",
-        modelName: "User",
+        tableName: "payments",
+        modelName: "Payment",
         timestamps: true,
     })
-], User);
-exports.default = User;
+], Payment);
+exports.default = Payment;

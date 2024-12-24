@@ -27,17 +27,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const catchAsyncError_1 = __importDefault(require("../services/catchAsyncError"));
 const authMiddleware_1 = __importStar(require("../middleware/authMiddleware"));
-const userController_1 = __importDefault(require("../controllers/userController"));
+const categoryController_1 = __importDefault(require("../controllers/categoryController"));
 const router = express_1.default.Router();
-router.route("/register").post((0, catchAsyncError_1.default)(userController_1.default.registerUser));
-router.route("/login").post((0, catchAsyncError_1.default)(userController_1.default.loginUser));
 router
-    .route("/users")
-    .get(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), (0, catchAsyncError_1.default)(userController_1.default.fetchUsers));
+    .route("/")
+    .post(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), categoryController_1.default.addCategory)
+    .get(categoryController_1.default.getCategories);
 router
-    .route("/user/:id")
-    .delete(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), (0, catchAsyncError_1.default)(userController_1.default.deleteUser))
-    .patch(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), (0, catchAsyncError_1.default)(userController_1.default.UpdateUser));
+    .route("/:id")
+    .delete(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), categoryController_1.default.deleteCategory)
+    .patch(authMiddleware_1.default.isAuthenticated, authMiddleware_1.default.restrictTo(authMiddleware_1.Role.Admin), categoryController_1.default.updateCategory);
 exports.default = router;

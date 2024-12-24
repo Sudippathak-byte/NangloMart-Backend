@@ -25,7 +25,7 @@ const adminseeder = () => __awaiter(void 0, void 0, void 0, function* () {
             email: "p2admin@gmail.com",
             password: bcrypt_1.default.hashSync("p2password", 8),
             username: "p2admin",
-            role: "admin",
+            role: 'admin'
         });
         console.log("admin credentials seeded sucessfully");
     }

@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
-let User = class User extends sequelize_typescript_1.Model {
+let Product = class Product extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
@@ -19,37 +19,57 @@ __decorate([
         defaultValue: sequelize_typescript_1.DataType.UUIDV4,
     }),
     __metadata("design:type", String)
-], User.prototype, "id", void 0);
+], Product.prototype, "id", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Product.prototype, "productName", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.TEXT,
+    }),
+    __metadata("design:type", String)
+], Product.prototype, "productDescription", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+    }),
+    __metadata("design:type", Number)
+], Product.prototype, "productPrice", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+    }),
+    __metadata("design:type", Number)
+], Product.prototype, "productTotalStockQty", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING,
     }),
     __metadata("design:type", String)
-], User.prototype, "username", void 0);
+], Product.prototype, "productImageUrl", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.ENUM("customer", "admin"),
-        defaultValue: "customer",
+        type: sequelize_typescript_1.DataType.INTEGER,
+        defaultValue: 0,
     }),
-    __metadata("design:type", String)
-], User.prototype, "role", void 0);
+    __metadata("design:type", Number)
+], Product.prototype, "rating", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
+        type: sequelize_typescript_1.DataType.INTEGER,
+        defaultValue: 0,
     }),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
-User = __decorate([
+    __metadata("design:type", Number)
+], Product.prototype, "numReviews", void 0);
+Product = __decorate([
     (0, sequelize_typescript_1.Table)({
-        tableName: "users",
-        modelName: "User",
+        tableName: "products",
+        modelName: "Product",
         timestamps: true,
     })
-], User);
-exports.default = User;
+], Product);
+exports.default = Product;

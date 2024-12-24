@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
-let User = class User extends sequelize_typescript_1.Model {
+let Review = class Review extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
@@ -19,37 +19,36 @@ __decorate([
         defaultValue: sequelize_typescript_1.DataType.UUIDV4,
     }),
     __metadata("design:type", String)
-], User.prototype, "id", void 0);
+], Review.prototype, "id", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Review.prototype, "reviewerName", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING,
     }),
     __metadata("design:type", String)
-], User.prototype, "username", void 0);
+], Review.prototype, "reviewContent", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.ENUM("customer", "admin"),
-        defaultValue: "customer",
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: false,
+        validate: {
+            min: 1,
+            max: 5,
+        },
     }),
-    __metadata("design:type", String)
-], User.prototype, "role", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
-User = __decorate([
+    __metadata("design:type", Number)
+], Review.prototype, "rating", void 0);
+Review = __decorate([
     (0, sequelize_typescript_1.Table)({
-        tableName: "users",
-        modelName: "User",
+        tableName: "reviews",
+        modelName: "Review",
         timestamps: true,
     })
-], User);
-exports.default = User;
+], Review);
+exports.default = Review;

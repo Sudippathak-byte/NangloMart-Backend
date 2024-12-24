@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
-let User = class User extends sequelize_typescript_1.Model {
+let Order = class Order extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
@@ -19,37 +19,46 @@ __decorate([
         defaultValue: sequelize_typescript_1.DataType.UUIDV4,
     }),
     __metadata("design:type", String)
-], User.prototype, "id", void 0);
+], Order.prototype, "id", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false,
+        validate: {
+            len: {
+                args: [10, 10],
+                msg: "Phone number must be 10 digits",
+            },
+        },
     }),
     __metadata("design:type", String)
-], User.prototype, "username", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.ENUM("customer", "admin"),
-        defaultValue: "customer",
-    }),
-    __metadata("design:type", String)
-], User.prototype, "role", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
+], Order.prototype, "phoneNumber", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false,
     }),
     __metadata("design:type", String)
-], User.prototype, "password", void 0);
-User = __decorate([
+], Order.prototype, "shippingAddress", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.FLOAT,
+        allowNull: false,
+    }),
+    __metadata("design:type", Number)
+], Order.prototype, "totalAmount", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.ENUM("pending", "cancelled", "delivered", "ontheway", "preparation"),
+        defaultValue: "pending",
+    }),
+    __metadata("design:type", String)
+], Order.prototype, "orderStatus", void 0);
+Order = __decorate([
     (0, sequelize_typescript_1.Table)({
-        tableName: "users",
-        modelName: "User",
+        tableName: "orders",
+        modelName: "Order",
         timestamps: true,
     })
-], User);
-exports.default = User;
+], Order);
+exports.default = Order;
