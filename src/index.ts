@@ -51,14 +51,6 @@ const server = app.listen(process.env.PORT, () => {
 });
 
 const io = new Server(server, {
-  // cors: {
-  //   origin: [
-  //     "https://quick-basket-ecommercesite.vercel.app/",
-  //     "https://quickbasketadmin.vercel.app/",
-  //     " http://localhost:5173/",
-  //     "http://localhost:5174/",
-  //   ],
-  // },
   cors: {
     origin: "*",
   },
